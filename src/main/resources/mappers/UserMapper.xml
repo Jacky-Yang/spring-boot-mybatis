@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jakcy.examples.mybatis.generator.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jakcy.examples.mybatis.generator.pojo.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="cre_user_id" jdbcType="VARCHAR" property="creUserId" />
+    <result column="crt_time" jdbcType="VARCHAR" property="crtTime" />
+    <result column="crt_user_name" jdbcType="VARCHAR" property="crtUserName" />
+    <result column="upt_time" jdbcType="VARCHAR" property="uptTime" />
+    <result column="upt_user_id" jdbcType="VARCHAR" property="uptUserId" />
+    <result column="upt_user_name" jdbcType="VARCHAR" property="uptUserName" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cre_user_id, crt_time, crt_user_name, upt_time, upt_user_id, upt_user_name, login_name, 
+    sex, user_name
+  </sql>
+  <select id="selectByExample" parameterType="com.jakcy.examples.mybatis.generator.pojo.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tbl_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jakcy.examples.mybatis.generator.pojo.UserExample">
+    delete from tbl_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jakcy.examples.mybatis.generator.pojo.User">
+    insert into tbl_user (id, cre_user_id, crt_time, 
+      crt_user_name, upt_time, upt_user_id, 
+      upt_user_name, login_name, sex, 
+      user_name)
+    values (#{id,jdbcType=VARCHAR}, #{creUserId,jdbcType=VARCHAR}, #{crtTime,jdbcType=VARCHAR}, 
+      #{crtUserName,jdbcType=VARCHAR}, #{uptTime,jdbcType=VARCHAR}, #{uptUserId,jdbcType=VARCHAR}, 
+      #{uptUserName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jakcy.examples.mybatis.generator.pojo.User">
+    insert into tbl_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="creUserId != null">
+        cre_user_id,
+      </if>
+      <if test="crtTime != null">
+        crt_time,
+      </if>
+      <if test="crtUserName != null">
+        crt_user_name,
+      </if>
+      <if test="uptTime != null">
+        upt_time,
+      </if>
+      <if test="uptUserId != null">
+        upt_user_id,
+      </if>
+      <if test="uptUserName != null">
+        upt_user_name,
+      </if>
+      <if test="loginName != null">
+        login_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="creUserId != null">
+        #{creUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTime != null">
+        #{crtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUserName != null">
+        #{crtUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="uptTime != null">
+        #{uptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uptUserId != null">
+        #{uptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="uptUserName != null">
+        #{uptUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jakcy.examples.mybatis.generator.pojo.UserExample" resultType="java.lang.Long">
+    select count(*) from tbl_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creUserId != null">
+        cre_user_id = #{record.creUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtTime != null">
+        crt_time = #{record.crtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtUserName != null">
+        crt_user_name = #{record.crtUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uptTime != null">
+        upt_time = #{record.uptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uptUserId != null">
+        upt_user_id = #{record.uptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uptUserName != null">
+        upt_user_name = #{record.uptUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginName != null">
+        login_name = #{record.loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_user
+    set id = #{record.id,jdbcType=VARCHAR},
+      cre_user_id = #{record.creUserId,jdbcType=VARCHAR},
+      crt_time = #{record.crtTime,jdbcType=VARCHAR},
+      crt_user_name = #{record.crtUserName,jdbcType=VARCHAR},
+      upt_time = #{record.uptTime,jdbcType=VARCHAR},
+      upt_user_id = #{record.uptUserId,jdbcType=VARCHAR},
+      upt_user_name = #{record.uptUserName,jdbcType=VARCHAR},
+      login_name = #{record.loginName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jakcy.examples.mybatis.generator.pojo.User">
+    update tbl_user
+    <set>
+      <if test="creUserId != null">
+        cre_user_id = #{creUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="crtTime != null">
+        crt_time = #{crtTime,jdbcType=VARCHAR},
+      </if>
+      <if test="crtUserName != null">
+        crt_user_name = #{crtUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="uptTime != null">
+        upt_time = #{uptTime,jdbcType=VARCHAR},
+      </if>
+      <if test="uptUserId != null">
+        upt_user_id = #{uptUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="uptUserName != null">
+        upt_user_name = #{uptUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        login_name = #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jakcy.examples.mybatis.generator.pojo.User">
+    update tbl_user
+    set cre_user_id = #{creUserId,jdbcType=VARCHAR},
+      crt_time = #{crtTime,jdbcType=VARCHAR},
+      crt_user_name = #{crtUserName,jdbcType=VARCHAR},
+      upt_time = #{uptTime,jdbcType=VARCHAR},
+      upt_user_id = #{uptUserId,jdbcType=VARCHAR},
+      upt_user_name = #{uptUserName,jdbcType=VARCHAR},
+      login_name = #{loginName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
